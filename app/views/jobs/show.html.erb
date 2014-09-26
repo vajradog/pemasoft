@@ -1,0 +1,79 @@
+<div class="row">   
+  <div class="large-12 columns"> 
+    <div class="large-3 columns">
+      <ul class="panel">
+        Other openings
+        <% @jobs.each do |job| %>
+        	<li><%= link_to job.title, job_path(job) %></li>   
+        	<%end %>    
+      </ul> 
+    </div>
+
+    <div class="large-9 columns">
+			<h4><%= @job.title %> <small>| <%= link_to 'Edit this Job', edit_job_path(@job) %> </small><br>
+			<small><%= @job.location %> | <%= @job.position_type %> | <span data-tooltip aria-haspopup="true" data-options="disable_for_touch:true" class="has-tip [tip-top tip-bottom tip-left tip-right] [radius round]" title="Job Published Date"> <%= @job.created_at.strftime("%B %d, %Y") %></span></small></h4>
+			<p><%= simple_format(@job.description) %></p>
+			<hr>
+			<%= form_for [@job, @candidate] do |f|%>
+      <div class="large-12 columns">
+			<%= f.label :resume, 'Resume: You can either paste/write your resume here or provide us an external link or your linkedin profile.' %> <br>
+			<%= f.text_area :resume, :class => 'ckeditor' %> <br><br>
+    </div>
+    <div class="large-12 columns">
+			<%= f.label :cover_letter %> <br>
+			<%= f.text_area :cover_letter, :class => 'ckeditor' %> <br>
+    </div>
+
+      <div class="large-4 columns">
+      <%= f.label :github, 'Github username' %>
+      <%= f.text_field :github, placeholder: 'Just the username' %> 
+    </div>
+    <div class="large-4 columns left">
+      <%= f.label :twitter, 'Twitter handle' %>
+      <%= f.text_field :twitter, placeholder: 'Just the handle' %> 
+    </div>
+    <div class="large-4 columns left">
+      <%= f.label :linkedin %>
+      <%= f.text_field :linkedin, placeholder: 'Full Linkedin address. Eg. http://www.linkedin.com/in/vajradog' %> 
+    </div>
+    <div class="large-4 columns left">
+      <%= f.hidden_field :job_id %>
+
+      <br>
+      <%= f.submit 'Submit Application', class: 'button' %>
+    <% end %>
+    </div>
+    
+
+      
+    </div>
+  </div>
+</div>
+    
+    
+  
+   
+  
+  <footer class="row">
+    <div class="large-12 columns">
+      <hr/>
+      <div class="row">
+        <div class="large-6 columns">
+          <p>© Copyright no one at all. Go to town.</p>
+        </div>
+        <div class="large-6 columns">
+          <ul class="inline-list right">
+            <li><a href="#">Section 1</a></li>
+            <li><a href="#">Section 2</a></li>
+            <li><a href="#">Section 3</a></li>
+            <li><a href="#">Section 4</a></li>
+          </ul>
+        </div>
+      </div>
+    </div> 
+  </footer>
+
+
+
+
+		

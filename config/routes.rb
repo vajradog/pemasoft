@@ -1,4 +1,16 @@
 Pemasoft::Application.routes.draw do
+  devise_for :users
+  root 'jobs#index'
+  resources :jobs do
+    resources :candidates do
+      member do
+        post 'vote'
+      end
+      resources :comments, only: [:new, :create, :show]
+    end
+  end
+
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

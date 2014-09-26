@@ -1,0 +1,49 @@
+<div class="row">   
+  <div class="large-12 columns"> 
+    <div class="large-3 columns">
+      <ul class="panel">
+        Currently we have
+        	<h3><%= pluralize(@jobs.count, 'Job opening') %></h3>          
+      </ul> 
+    </div>
+
+    <div class="large-9 columns">
+    	<% @jobs.each do |job| %>
+			
+			<h4><%= link_to job.title, job_path(job), :data => { :no_turbolink => true } %> <br><small><%= job.position_type %> | <%= job.location %> | <span data-tooltip aria-haspopup="true" data-options="disable_for_touch:true" class="has-tip [tip-top tip-bottom tip-left tip-right] [radius round]" title="Job Published Date"> <%= job.created_at.strftime("%B %d, %Y") %></span></small></h4>
+
+			
+
+
+			<div class="panel">
+			<%= link_to pluralize(job.candidates.count, 'candidate'), job_candidates_path(job) %> applied.
+			</div>
+			<hr>
+		<% end %>
+      
+    </div>
+  </div>
+</div>
+    
+    
+  
+   
+  
+  <footer class="row">
+    <div class="large-12 columns">
+      <hr/>
+      <div class="row">
+        <div class="large-6 columns">
+          <p>© Copyright no one at all. Go to town.</p>
+        </div>
+        <div class="large-6 columns">
+          <ul class="inline-list right">
+            <li><a href="#">Section 1</a></li>
+            <li><a href="#">Section 2</a></li>
+            <li><a href="#">Section 3</a></li>
+            <li><a href="#">Section 4</a></li>
+          </ul>
+        </div>
+      </div>
+    </div> 
+  </footer>

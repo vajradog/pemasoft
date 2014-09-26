@@ -3,7 +3,7 @@ ruby '2.0.0'
 
 gem 'rails', '4.0.8'
 gem 'sass-rails', '~> 4.0.2'
-gem 'zurb-foundation'
+gem 'foundation-rails','5.4.3.1'
 gem 'pg'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -15,13 +15,17 @@ gem 'jbuilder', '~> 1.2'
 gem 'rails_12factor'
 gem 'globalize', '~> 4.0.2'
 gem 'rack-zippy'
+gem 'ckeditor_rails'
+gem 'activerecord-reputation-system', github: 'NARKOZ/activerecord-reputation-system', branch: 'rails4'
+
+
 #gem 'ancestry'
 gem 'devise'
 #gem 'prawn'
 #gem 'pdfkit'
 
 group :development, :test do
-  gem 'sqlite3', '1.3.8'
+  #gem 'sqlite3', '1.3.8'
   gem 'rspec-rails', '2.13.1'
 end
 

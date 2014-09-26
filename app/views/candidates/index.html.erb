@@ -1,0 +1,27 @@
+<div class="row">   
+	<div class="large-12 columns"> 
+		<div class="large-3 columns">
+      <ul class="pricing-table left-side">
+        <li class="title">All Candidates </li>
+        <% @job.candidates.each do |candidate| %>
+          <% if candidate.reputation_for(:votes).to_i > 0 %>
+          <li class="price <%= 'active' if current_page?(job_candidate_path(@job, candidate)) %>"><%= link_to candidate.user.first_name, job_candidate_path(@job, candidate) %>
+            <br><small><%= pluralize candidate.reputation_for(:votes).to_i, "Recommendation"%></small>
+            </li>
+            <%else%>
+            <li class="bullet-item"><%= link_to candidate.user.first_name, job_candidate_path(@job, candidate) %><br>
+            <small><%= pluralize candidate.reputation_for(:votes).to_i, "Recommendation"%></small>
+            </li>
+            <% end %>
+        <% end %> 
+
+      </ul> 
+  	</div>
+
+  	<div class="large-9 columns">
+  		<h3>Candidates Index page </h3>
+			Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello 
+		</div>
+	</div>
+</div>
+    
