@@ -1,5 +1,7 @@
 Pemasoft::Application.routes.draw do
-  devise_for :users
+devise_for :users#, :controllers => { :edit_user_registration => "registrations"}
+resources :users
+
   root 'jobs#index'
   resources :jobs do
     resources :candidates do
@@ -9,6 +11,8 @@ Pemasoft::Application.routes.draw do
       resources :comments, only: [:new, :create, :show]
     end
   end
+
+  #resources :candidates
 
   
   # The priority is based upon order of creation: first created -> highest priority.

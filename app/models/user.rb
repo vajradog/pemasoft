@@ -3,15 +3,51 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  before_save :set_default_role
+
+	
          
 	has_many :jobs
 	has_many :candidates, dependent: :destroy
 	has_many :comments
 	has_many :evaluations, class_name: "ReputationSystem::Evaluation", as: :source
+	has_many :roles
 
-	#has_reputation :votes, source: {reputation: :votes, of: :candidates}, aggregated_by: :sum
+	validates :first_name, presence: true
+	validates :last_name, presence: true
+
+
+	ROLES = %w[admin moderator registered guest banned]
+
+	def roles=(roles)
+    self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.sum
+  end
+  
+  def roles
+   ROLES.reject { |r| ((roles_mask || 0) & 2**ROLES.index(r)).zero? }
+  end
+  
+  def role?(role)
+    roles.include? role.to_s
+  end
+
+  def is?(role)
+  	roles.include?(role.to_s)
+	end
+
+	has_reputation :votes, source: {reputation: :votes, of: :candidates}, aggregated_by: :sum
 
 	def voted_for?(candidate)
 		evaluations.where(target_type: candidate.class, target_id: candidate.id).present?
 	end
+
+	def full_name
+		[first_name, last_name].join(' ')
+	end
+
+	private
+	
+  def set_default_role
+    self.roles = [ "registered" ]
+  end
 end

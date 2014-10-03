@@ -16,6 +16,7 @@ gem 'rails_12factor'
 gem 'globalize', '~> 4.0.2'
 gem 'rack-zippy'
 gem 'ckeditor_rails'
+gem 'cancancan', '~> 1.9'
 gem 'activerecord-reputation-system', github: 'NARKOZ/activerecord-reputation-system', branch: 'rails4'
 
 

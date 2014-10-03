@@ -1,129 +1,135 @@
+<div class="row">
+  <div class="large-3 columns">
+    <%= render 'all' %> <!-- sidebar for all candidates, editable in views/candidates/_all.html.erb -->
+  </div>
 
-
-
-<div class="row">   
+  <div class="large-9 columns">
     <div class="large-3 columns">
-      <ul class="pricing-table left-side">
-        <li class="title">All Candidates </li>
-        <% @job.candidates.each do |candidate| %>
-          <% if candidate.reputation_for(:votes).to_i > 0 %>
-          <li class="price <%= 'active' if current_page?(job_candidate_path(@job, candidate)) %>"><%= link_to candidate.user.first_name, job_candidate_path(@job, candidate) %>
-            <br><small><%= pluralize candidate.reputation_for(:votes).to_i, "Recommendation"%></small>
-            </li>
-            <%else%>
-            <li class="bullet-item"><%= link_to candidate.user.first_name, job_candidate_path(@job, candidate) %><br>
-            <small><%= pluralize candidate.reputation_for(:votes).to_i, "Recommendation"%></small>
-            </li>
-            <% end %>
-        <% end %> 
-
-      </ul> 
-    </div>
-
-    <div class="large-9 columns">
-      <div class="large-3 columns">
       <%= image_tag avatar_url(@candidate.user)%>
-      </div>
-      <div class="large-4 columns left">
-        <ul class="vcard">
-    <li class="fn"><%= @candidate.user.first_name%> <%= @candidate.user.last_name %></li>
-    <li class="nickname">6113 94 Street, Apt 2K</li>
-    <li class="org">New York, NY 11374</li>
-    <li class="tel"><a href="tel:408-867-5309">408-867-5309</a></li>
-    <li class="email"><%= @candidate.user.email %></li>
-</ul>
-
-        </div>
-        <div class="large-5 columns">
-        <ul class="vcard">
-          <% if @candidate.github? || @candidate.twitter? || @candidate.linkedin? %>
-    <li>Social Networks</li>
-    <% if @candidate.github? %>
-    <li class="url"><%= link_to 'Github', @candidate.github, target: '_blank' %></li>
-    <% end %>
-    <% if @candidate.linkedin? %>
-    <li class="url"><%= link_to 'LinkedIn', @candidate.linkedin, target: '_blank' %></li>
-    <% end %>
-    <% if @candidate.twitter? %>
-    <li class="url"><%= link_to 'Twitter', @candidate.twitter, target: '_blank' %></li>
-    <% end %>
-    <% else %>
-    No social network specified
-    <% end %>
-</ul>
-
-        </div>
     </div>
+      
+    <div class="large-4 columns left">
+      <ul class="vcard">
+        <li class="fn"><%= @candidate.user.full_name%></li>
+        <li class="nickname">6113 94 Street, Apt 2K</li>
+        <li class="org">New York, NY 11374</li>
+        <li class="tel"><a href="tel:408-867-5309">408-867-5309</a></li>
+        <li class="email"><%= @candidate.user.email %></li>
+      </ul>
+    </div>
+
+    <div class="large-5 columns">
+      <ul class="vcard">
+        <% if @candidate.github? || @candidate.twitter? || @candidate.linkedin? %>
+          <li>Social Networks</li>
+          <% if @candidate.github? %>
+            <li class="url"><%= link_to 'Github', @candidate.github, target: '_blank' %></li>
+          <% end %>
+          <% if @candidate.linkedin? %>
+            <li class="url"><%= link_to 'LinkedIn', @candidate.linkedin, target: '_blank' %></li>
+          <% end %>
+          <% if @candidate.twitter? %>
+            <li class="url"><%= link_to 'Twitter', @candidate.twitter, target: '_blank' %></li>
+          <% end %>
+        <% else %>
+          No social network specified
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <% if can? :manage, Vote %>
     <div class="large-9 columns">
+      <% if can? :manage, Vote %>
+        <div class="panel">
+          <%= pluralize @candidate.reputation_for(:votes).to_i, "recommendation"%>: 
+          <%= (@candidate.evaluators_for(:votes).map {|user| user.first_name}).to_sentence %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="large-9 columns">
+    <% if @candidate.status %>
       <div class="panel">
-     <%= pluralize @candidate.reputation_for(:votes).to_i, "recommendation"%>: 
-     <%= (@candidate.evaluators_for(:votes).map {|user| user.first_name}).to_sentence %>
-     </div>
-     <% if @candidate.status %>
-     <div class="panel">
-     <strong>Application Status:</strong> <%= @candidate.status %> <br><br>
-     <% if @candidate.status == 'Under Consideration' %> 
-     <p>Dear <%= @candidate.user.first_name %>,
-      <br>Your Application is currently being reviewed by the team. If you don't hear from us, please check this page for status updates.</p> 
-     <% end %>
-     <% if @candidate.status == 'Application Received' %> 
-     <p>Dear <%= @candidate.user.first_name %>,
-      <br>We have received your application. If you don't hear from you please visit this page again as we update the application status regularly. </p> 
-     <% end %>
-     <% if @candidate.status == 'Interview Request' %> 
-     <p>If you haven't heard from us already, we would like to schedule an interview with you. Please contact our HR department at your earliest.</p> 
-     <% end %>
-     <% if @candidate.status == 'Declined' %> 
-     Dear <%= @candidate.user.first_name %>,
-     <p>Thank you for your time and energy in filling out an application for our <%= @job.title %> position. Unfortunately, we have decided not to proceed with your candidacy at this time. <br><br> 
+        <strong>Application Status:</strong> <%= @candidate.status %> <br><br>
+     
+        <% if @candidate.status == 'Under Consideration' %> 
+          <p>Dear <%= @candidate.user.first_name %>,
+          <br>Your Application is currently being reviewed by the team. If you don't hear from us, please check this page for status updates.</p> 
+        <% end %>
+        
+        <% if @candidate.status == 'Application Received' %> 
+          <p>Dear <%= @candidate.user.first_name %>,
+          <br>We have received your application. If you don't hear from you please visit this page again as we update the application status regularly. </p> 
+        <% end %>
 
-      We know how important it is to find a role and company that you are passionate about and so, from our entire team. We encourage you to apply for future openings for which you qualify. <br><br>Thanks for your interest in our company and we wish you the best of luck on your search.</p> 
-     <% end %>
+        <% if @candidate.status == 'Interview Request' %> 
+          <p>If you haven't heard from us already, we would like to schedule an interview with you. Please contact our HR department at your earliest.</p> 
+        <% end %>
 
-     </div>
-     <% end %>
+        <% if @candidate.status == 'Declined' %> 
+          Dear <%= @candidate.user.first_name %>,
+          <p>Thank you for your time and energy in filling out an application for our <%= @job.title %> position. Unfortunately, we have decided not to proceed with your candidacy at this time. <br><br> 
 
-   
+          We know how important it is to find a role and company that you are passionate about and so, from our entire team. We encourage you to apply for future openings for which you qualify. <br><br>Thanks for your interest in our company and we wish you the best of luck on your search.</p> 
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 
 
+  <% if can? :manage, Vote %>
+    <div class="large-9 columns right">
       <% if current_user && !current_user.voted_for?(@candidate) %>
         <%= link_to "I recommend this candidate", vote_job_candidate_path(@job, @candidate, type: "up"), method: "post", class:"button alert" %>
 
        <!-- <%#= link_to "down", vote_job_candidate_path(@job, @candidate, type: "down"), method: "post" %> -->
       <% end %>
+    </div>
+  <% end %>
       
-      <hr>
-      
+  <div class="large-9 columns">
+    <h4><small>Job Title: <%= @candidate.job.title %></small></h4>
+    <dl class="tabs" data-tab>
+      <dd class="active"><a href="#panel1"><strong>Cover Letter</strong></a></dd>
+      <dd><a href="#panel2"><strong>Resume</strong> </a></dd>
+    </dl>
 
-      <h4><small>Job Title: <%= @candidate.job.title %></small></h4>
-      <dl class="tabs" data-tab>
-  <dd class="active"><a href="#panel1">Cover Letter</a></dd>
-  <dd><a href="#panel2">Resume</a></dd>
-</dl>
-<div class="tabs-content">
-  <div class="content active" id="panel1">
-    <p><strong>Cover Letter</strong> <%= @candidate.cover_letter %></p>
-  </div>
-  <div class="content" id="panel2">
-     <p><strong>Resume:</strong> <%= @candidate.resume %></p>
-  </div>
-</div>
-     
-      
-      <p><a href="<%= @candidate.github %>"> <%= @candidate.github %></a> </p>
+    <div class="tabs-content">
+      <div class="content active" id="panel1">
+        <p><%=simple_format @candidate.cover_letter %></p>
+      </div>
+    <div class="content" id="panel2">
+      <p><%=simple_format @candidate.resume %></p>
+    </div>
+
+
+    <% if can? :manage, Role %>
       <div class="panel radius">
-        <strong>Hiring manager status setup<small>
-          <em>Visible only to the hiring manager</em></small></strong><br><br>
+        <strong>Hiring manager status setup
+        <small><em>Visible only to the admin</em></small>
+        </strong><br><br>
 
-          <div class="large-4 columns">Set Applicant Status: </div>
-          <div class="large-4 columns left">
-        <%= form_for [@job, @candidate] do |f|%>
-        <%= f.select :status, ['Application Received', 'Under Consideration', 'Declined', 'Interview Request']%> 
-        </div><div class="large-4 columns left"> <%= f.submit 'Update Candidate Status' %>
-        <% end %>
+        <div class="large-4 columns">Set Applicant Status: </div>
+        <div class="large-4 columns left">
+          <%= form_for [@job, @candidate] do |f|%>
+          <%= f.select :status, ['Application Received', 'Under Consideration', 'Declined', 'Interview Request']%> 
         </div>
-        <hr>
-        <strong>Internal discussion <small><em>Visible only to the hiring team and manager</em></small></strong><br><br>
+        <div class="large-4 columns left"> 
+          <%= f.submit 'Update Candidate Status' %>
+        <% end %>
+      </div>
+    <% end %> 
+  </div>
+    
+  
+  <% if can? :manage, Comment %>
+    <div class="large-12 columns">
+      <div class="panel radius">
+        <strong>Internal discussion 
+        <small><em>Visible only to the hiring team and manager</em></small></strong>
+        <br><br>
         <%= form_for [@job, @candidate, @comment] do |f|%>
           <%= f.text_area :body, placeholder: 'Your Comment' %>
           <%= f.submit  %>
@@ -131,32 +137,12 @@
         <hr>
 
         <% @candidate.comments.each do |comment| %>
-        <strong><%= comment.user.first_name %>:</strong> <em><%= comment.body %> </em>
-<hr>
+          <strong><%= comment.user.first_name %>:</strong> 
+          <em><%= comment.body %> </em>
+          <hr>
         <% end %>
-    </div>
-</div>
-    
-    
-  
-   
-  
-  <footer class="row">
-    <div class="large-12 columns">
-      <hr/>
-      <div class="row">
-        <div class="large-6 columns">
-          <p>© Copyright no one at all. Go to town.</p>
-        </div>
-        <div class="large-6 columns">
-          <ul class="inline-list right">
-            <li><a href="#">Section 1</a></li>
-            <li><a href="#">Section 2</a></li>
-            <li><a href="#">Section 3</a></li>
-            <li><a href="#">Section 4</a></li>
-          </ul>
-        </div>
       </div>
-    </div> 
-  </footer>
-  
+    </div>
+  <% end %>
+</div></div></div>
+    

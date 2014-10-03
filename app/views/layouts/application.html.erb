@@ -17,52 +17,18 @@
   	<title><%= content_for?(:title) ? yield(:title) : "PemaSoft" %></title>
 
   	<%= stylesheet_link_tag    "application" %>
-  	<%= javascript_include_tag "vendor/custom.modernizr" %>
+  	<!--<#%= javascript_include_tag "vendor/custom.modernizr" %> -->
     <%= csrf_meta_tags %>
   </head>
 
   <body>
-    <br>
-
-<div class="row">
-        <nav class="top-bar" data-topbar>
-
-    <div class="large-3 columns">
-      <%= link_to 'Home Page', root_path%> | <%= link_to 'New Job', new_job_path, :data => { :no_turbolink => true } %>
-
-      <!-- <h1><img src="http://placehold.it/400x100&text=Logo"/></h1> -->
-    </div>
-    <div class="large-9 columns">
-      <ul class="inline-list right">
-        
-         <% if user_signed_in? %>
-        Logged in as <%= current_user.email %>.
-        <%= link_to 'Edit profile', edit_user_registration_path %> |
-        <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to "Sign up", new_user_registration_path %> |
-        <%= link_to "Login", new_user_session_path %>
-      <% end %>
-
-    
-      </ul>
-    </div>
-  </div>
-      </nav>
-
-
-
-    <div class="row">
-      
-
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      
-    </div>
+    <%= render 'shared/header'%>
+   
 
     <%= yield %>
 
-    
+        
+<%= render 'shared/footer' %>
     <%= javascript_include_tag "application" %>
   </body>
 </html>

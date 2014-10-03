@@ -1,7 +1,11 @@
 class CandidatesController < ApplicationController
+	  load_and_authorize_resource :job
+	  load_and_authorize_resource :candidate, :through=> :job
+
 
 
 	def index
+		#authorize! :read, Ability
 		#@candidates = Candidate.reorder('votes desc').find_with_reputation(:votes, :all)
 		#@candidates = Candidate.order("RANDOM()")  for random 
 		@job = Job.find(params[:job_id])
@@ -14,11 +18,11 @@ class CandidatesController < ApplicationController
 		@candidate.status = "Application Received"
 
 		if @candidate.save
-			flash[:success] = "Candidate saved"
-			redirect_to job_path(@job)
+			flash[:success] = "Application received"
+			redirect_to root_path #job_candidate_path(@job, @candidate)
 		else
 			flash[:error] = "Could not save candidate"
-			render :back
+			redirect_to job_path(@job)
 		end
 	end
 

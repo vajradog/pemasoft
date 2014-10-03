@@ -1,0 +1,19 @@
+<ul class="pricing-table left-side">
+      <% if can? :manage, Candidate %>
+        <li class="title">All Candidates </li>
+        <% @job.candidates.each do |candidate| %>
+          <% if candidate.reputation_for(:votes).to_i > 0 %>
+          <li class="price <%= 'active' if current_page?(job_candidate_path(@job, candidate)) %>"><%= link_to candidate.user.full_name, job_candidate_path(@job, candidate) %>
+            <br><small><%= pluralize candidate.reputation_for(:votes).to_i, "Recommendation"%></small>
+            </li>
+            <%else%>
+            <li class="bullet-item"><%= link_to candidate.user.full_name, job_candidate_path(@job, candidate) %> <br>
+            <small><%= pluralize candidate.reputation_for(:votes).to_i, "Recommendation"%></small>
+            </li>
+            <% end %>
+        <% end %> 
+        <% else %>
+        You've applied to 
+        <% end %> 
+
+      </ul> 

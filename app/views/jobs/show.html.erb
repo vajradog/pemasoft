@@ -1,19 +1,32 @@
 <div class="row">   
   <div class="large-12 columns"> 
     <div class="large-3 columns">
-      <ul class="panel">
-        Other openings
+      <ul class="pricing-table left-side">
+        <li class="title"> Other openings </li>
         <% @jobs.each do |job| %>
-        	<li><%= link_to job.title, job_path(job) %></li>   
+        	<li class="bullet-item"><%= link_to job.title, job_path(job), :data => { :no_turbolink => true }  %></li>   
         	<%end %>    
       </ul> 
     </div>
 
     <div class="large-9 columns">
-			<h4><%= @job.title %> <small>| <%= link_to 'Edit this Job', edit_job_path(@job) %> </small><br>
+			<h4><%= @job.title %> 
+
+        <% if can? :manage, Job %>
+        <small>| <%= link_to 'Edit this Job', edit_job_path(@job) %> </small> 
+        <% end %><br>
 			<small><%= @job.location %> | <%= @job.position_type %> | <span data-tooltip aria-haspopup="true" data-options="disable_for_touch:true" class="has-tip [tip-top tip-bottom tip-left tip-right] [radius round]" title="Job Published Date"> <%= @job.created_at.strftime("%B %d, %Y") %></span></small></h4>
 			<p><%= simple_format(@job.description) %></p>
 			<hr>
+
+
+
+      <% if user_signed_in? %>
+    
+<dl class="accordion" data-accordion>
+   <dd class="accordion-navigation">
+     <a href="#panel2">Click here to apply for this position</a>
+     <div id="panel2" class="content">
 			<%= form_for [@job, @candidate] do |f|%>
       <div class="large-12 columns">
 			<%= f.label :resume, 'Resume: You can either paste/write your resume here or provide us an external link or your linkedin profile.' %> <br>
@@ -43,37 +56,16 @@
       <%= f.submit 'Submit Application', class: 'button' %>
     <% end %>
     </div>
-    
+  </dd>
+  </dl>
+    <% else %>
+    <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "Login", new_user_session_path %> to apply.
+    <% end %>
 
-      
+    </div>      
     </div>
   </div>
 </div>
     
-    
-  
    
-  
-  <footer class="row">
-    <div class="large-12 columns">
-      <hr/>
-      <div class="row">
-        <div class="large-6 columns">
-          <p>© Copyright no one at all. Go to town.</p>
-        </div>
-        <div class="large-6 columns">
-          <ul class="inline-list right">
-            <li><a href="#">Section 1</a></li>
-            <li><a href="#">Section 2</a></li>
-            <li><a href="#">Section 3</a></li>
-            <li><a href="#">Section 4</a></li>
-          </ul>
-        </div>
-      </div>
-    </div> 
-  </footer>
-
-
-
-
 		
