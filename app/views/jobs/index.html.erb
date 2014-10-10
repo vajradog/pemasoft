@@ -3,7 +3,14 @@
     <div class="large-3 columns">
       <ul class="pricing-table left-side">
         <li class="title"> Currently we have </li>
-        	<li class="bullet-item"><h3><%= pluralize(@jobs.count, 'Job opening') %></h3></li>     
+        	<li class="bullet-item"><h3><%= pluralize(@jobs.count, 'Job opening') %></h3></li>
+         <% if user_signed_in? %> <br>
+         <li class="title"> Your Application Status </li>
+          <li class="price"><% @current_user.candidates.each do |user| %> 
+            <%= user.job.title %> <br><%= link_to user.status, job_candidate_path(user.job_id, user) %> 
+            <% end %>
+            </li>
+          <% end %>
       </ul> 
        <ul class="pricing-table left-side">
           <li class="bullet-item"> <img src="http://www.agcensus.usda.gov/Partners/Drop_Ins/Half_page_vertical_Census%20ad_orange.jpg"></li>     

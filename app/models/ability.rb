@@ -15,8 +15,7 @@ class Ability
 
       #if user.role? :guest
       #  cannot :read, Job
-      elsif user.role? :moderator
-       can :read, Job
+      elsif user.role? :moderator 
        can :manage, Candidate
        can :manage, Vote
        can :manage, Comment

@@ -19,22 +19,53 @@
 			<p><%= simple_format(@job.description) %></p>
 			<hr>
 
+     
+     <!-- <#% if @job.candidates.map(&:user_id).include?current_user.id  %>
+      Thupten la this guy applied
+      <#% else %>
+      Thupten, he did not apply
+      <#% end %>
+    -->
+<% if user_signed_in? %>
+
+    <% if @job.candidates.map(&:user_id).include?current_user.id  %>
+       <strong>You already applied for this position.</strong> 
+       <br>
+      
+            
+  <table>
+  <thead>
+    <tr>
+      <th>Position Applied</th>
+      <th>Application Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr> <% @current_user.candidates.each do |user| %> 
+      <td><%= user.job.title %></td>
+      <td><%= link_to user.status, job_candidate_path(user.job_id, user) %></td>
+
+    </tr>
+   <% end %>
+  </tbody>
+</table>
 
 
-      <% if user_signed_in? %>
-    
+            <!-- maybe add user application status here? -->
+      <% else %>
+         
 <dl class="accordion" data-accordion>
    <dd class="accordion-navigation">
      <a href="#panel2">Click here to apply for this position</a>
      <div id="panel2" class="content">
-			<%= form_for [@job, @candidate] do |f|%>
+      <%= form_for [@job, @candidate] do |f|%>
       <div class="large-12 columns">
-			<%= f.label :resume, 'Resume: You can either paste/write your resume here or provide us an external link or your linkedin profile.' %> <br>
-			<%= f.text_area :resume, :class => 'ckeditor' %> <br><br>
+      <%= f.label :resume, 'Resume: You can either paste/write your resume here or provide us an external link or your linkedin profile.' %> <br>
+      <%= f.text_area :resume, :class => 'ckeditor' %> <br><br>
     </div>
     <div class="large-12 columns">
-			<%= f.label :cover_letter %> <br>
-			<%= f.text_area :cover_letter, :class => 'ckeditor' %> <br>
+      <%= f.label :cover_letter %> <br>
+      <%= f.text_area :cover_letter, :class => 'ckeditor' %> <br>
     </div>
 
       <div class="large-4 columns">
@@ -58,9 +89,37 @@
     </div>
   </dd>
   </dl>
-    <% else %>
-    <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "Login", new_user_session_path %> to apply.
+      <% end %>
+
+<% else %>
+    <%= link_to "Sign up", new_user_registration_path, :data => { :no_turbolink => true } %> or <%= link_to "Login", new_user_session_path, :data => { :no_turbolink => true } %> to apply.
     <% end %>
+
+
+<hr>
+<!--
+<#% @job.candidates.each do |candidate| %>
+  <#% if candidate.user.id == @current_user.id %>
+    You applied for this position and your application status is: <strong><#%= candidate.status %></strong>
+   
+  <%# end %>
+     <#% end %>
+
+ 
+
+
+
+     <#% @job.candidates.each do |candidate| %>
+     <#%= link_to candidate.user.id, job_candidate_path(@job, candidate) %> hey
+     <#% end %> 
+<hr>
+
+<#% if @current_user.candidates.where(:job_id == @job.id).exists? %>  
+
+Hello
+<#% end %>-->
+
+
 
     </div>      
     </div>

@@ -11,4 +11,9 @@ class Candidate < ActiveRecord::Base
   scope :under_consideration, -> { where status: 'Under Consideration'}
   scope :declined, -> { where status: 'Declined'}
   scope :interview, -> { where status: 'Interview Request'}
+
+  #def to_param
+  #  self.user.email
+  #end
+
 end

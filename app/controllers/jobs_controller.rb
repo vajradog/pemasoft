@@ -3,6 +3,10 @@ class JobsController < ApplicationController
 
 	def index
 		@jobs = Job.all
+		
+
+	#	@users = User.all
+
 	end
 
 	def new
@@ -24,6 +28,7 @@ class JobsController < ApplicationController
 	def show
 		@jobs = Job.all
 		@candidate = Candidate.new
+
 		#@job.candidate = Candidate.find(params[:id])
 		#@candidates = @job.candidates.all
 	end

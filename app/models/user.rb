@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  before_save :set_default_role
+  before_create :set_default_role
 
 	
          
@@ -43,6 +43,15 @@ class User < ActiveRecord::Base
 
 	def full_name
 		[first_name, last_name].join(' ')
+	end
+
+	def self.text_search(query)
+		if query.present?
+			search(query)
+		else
+			scoped
+		end
+		
 	end
 
 	private

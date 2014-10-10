@@ -17,8 +17,9 @@ gem 'globalize', '~> 4.0.2'
 gem 'rack-zippy'
 gem 'ckeditor_rails'
 gem 'cancancan', '~> 1.9'
+gem 'texticle', require: 'texticle/rails'
 gem 'activerecord-reputation-system', github: 'NARKOZ/activerecord-reputation-system', branch: 'rails4'
-
+gem 'friendly_id', '~> 5.0.0'
 
 #gem 'ancestry'
 gem 'devise'

@@ -39,17 +39,17 @@
   </div>
 
   <% if can? :manage, Vote %>
-    <div class="large-9 columns">
+    <div class="large-9 columns right">
       <% if can? :manage, Vote %>
         <div class="panel">
           <%= pluralize @candidate.reputation_for(:votes).to_i, "recommendation"%>: 
-          <%= (@candidate.evaluators_for(:votes).map {|user| user.first_name}).to_sentence %>
+          <%= (@candidate.evaluators_for(:votes).map {|user| user.full_name}).to_sentence %>
         </div>
       <% end %>
     </div>
   <% end %>
 
-  <div class="large-9 columns">
+  <div class="large-9 columns right">
     <% if @candidate.status %>
       <div class="panel">
         <strong>Application Status:</strong> <%= @candidate.status %> <br><br>
@@ -61,7 +61,7 @@
         
         <% if @candidate.status == 'Application Received' %> 
           <p>Dear <%= @candidate.user.first_name %>,
-          <br>We have received your application. If you don't hear from you please visit this page again as we update the application status regularly. </p> 
+          <br>We have received your application. If you don't hear from us please visit this page again as we update the application status regularly. </p> 
         <% end %>
 
         <% if @candidate.status == 'Interview Request' %> 

@@ -1,6 +1,10 @@
 Pemasoft::Application.routes.draw do
-devise_for :users#, :controllers => { :edit_user_registration => "registrations"}
-resources :users
+devise_for :users#, :controllers => { :registrations => "registrations"}
+resources :users, :controller => "users"
+# MAKE SURE ABOUT THE ROUTES, USERS 
+#SEE IF WE NEED REGISTRATIONS CONTROLLER
+
+
 
   root 'jobs#index'
   resources :jobs do
@@ -11,6 +15,8 @@ resources :users
       resources :comments, only: [:new, :create, :show]
     end
   end
+
+  get 'search' => 'users#search'
 
   #resources :candidates
 

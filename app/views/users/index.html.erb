@@ -1,7 +1,15 @@
 <div class="row">
-    <div class="large-12 columns">
-    	<% @users.each do |user| %>
-	<%= link_to user.first_name, user_path(user) %> <br>
-<% end %>
-</div>
+	<div class="large-12 columns">
+		<!-- uncomment this to enable search.
+		Also remove the '#' to activate the form
+
+		<#%= form_tag users_path, method: :get do %>
+			<#%= text_field_tag :query, params[:query]%>
+    	<#%= submit_tag "Search", name: nil %>
+    <#% end %>
+  	-->
+		<% @users.each do |user| %>
+			<%= link_to user.full_name, user_path(user) %> <br>
+		<% end %>
+	</div>
 </div>

@@ -30,4 +30,6 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:first_name, :last_name, :password, :password_confirmation, :avatar_url, :current_password, :email, roles: [])}
   end
 
+  
+
 end
