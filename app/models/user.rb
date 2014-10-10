@@ -57,8 +57,8 @@ class User < ActiveRecord::Base
 	private
 	
   def set_default_role
-  	if User.count == 1
-  		self.roles = ["admin"]
+  	if User.count == 0
+  		self.roles = [ "admin" ]
   	else
     	self.roles = [ "registered" ]
   	end
