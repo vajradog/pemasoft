@@ -4,6 +4,9 @@
     background-color: #FF6C48;
 }
 
+.pricing-table *{
+	line-height: 1.5;
+}
 
 /* ============
    1 = Global 
@@ -119,7 +122,7 @@ ul.sf-menu li li li:hover ul, ul.sf-menu li li li.sfHover ul { left: 175px; top:
 
 
 /* footer */
-footer {padding:50px 0 15px;  background:#656565;}
+footer {padding:5px 0 50px;  background:#656565;}
 .contacts {padding-bottom:30px; color:#fff; text-align: center; font-size:14px;font-weight: 300; }
 .contacts a {color:#fff;}
 .contacts a:hover {text-decoration: none; color: #C5645B;}

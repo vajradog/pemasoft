@@ -7,8 +7,9 @@ class CandidatesController < ApplicationController
 	def index
 		#authorize! :read, Ability
 		#@candidates = Candidate.reorder('votes desc').find_with_reputation(:votes, :all)
-		#@candidates = Candidate.order("RANDOM()")  for random 
+		#@candidates = Candidate.order("RANDOM()")  
 		@job = Job.find(params[:job_id])
+		@candidates = @job.candidates.reorder('votes desc').find_with_reputation(:votes, :all)
 	end
 
 	def create
@@ -30,6 +31,7 @@ class CandidatesController < ApplicationController
 		@job = Job.find(params[:job_id])
 		@candidate = Candidate.find(params[:id])
 		@comment = Comment.new
+		@candidates = @job.candidates.reorder('votes desc').find_with_reputation(:votes, :all)
 		#@candidate.job = @job
 	end
 
@@ -42,10 +44,10 @@ class CandidatesController < ApplicationController
 		@candidate = Candidate.find(params[:id])
 		if @candidate.update_attributes(candidate_params)
 			flash[:notice] = "Candidate updated"
-			redirect_to root_path
+			redirect_to job_candidate_path
 		else
 			flash[:notice] = "Could not update candidate"
-			render edit
+			render :back
 		end
 	end
 
@@ -54,9 +56,9 @@ class CandidatesController < ApplicationController
 		@candidate = Candidate.find(params[:id])
 		@candidate.add_or_update_evaluation(:votes, value, current_user)
 		redirect_to :back, notice: "Thank you for voting"
-
-
 	end
+
+
 
 	private
 

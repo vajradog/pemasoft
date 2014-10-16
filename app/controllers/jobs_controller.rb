@@ -29,7 +29,7 @@ class JobsController < ApplicationController
 		@jobs = Job.all
 		@candidate = Candidate.new
 
-		#@job.candidate = Candidate.find(params[:id])
+		#@job.candidates = Candidate.find(params[:id])
 		#@candidates = @job.candidates.all
 	end
 

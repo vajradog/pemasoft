@@ -5,8 +5,21 @@
   	</div>
 
   	<div class="large-9 columns">
-  		<h3>Candidates Index page </h3>
-			Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello 
+  		<h3>Candidates overview </h3>
+  		<h5>Job title: <%= @job.title %></h5> <br>
+			We have a total of <strong><%= @job.candidates.count %></strong> candidates for this job. <br>
+			
+			We declined <%= @job.candidates.declined.count %> candidates. <strong></strong><br>
+
+
+			We are considering <%= @job.candidates.under_consideration.count %> candidates<br>
+			We have requested phone interview for <strong><%= @job.candidates.interview.count %></strong> candidates.<br>
+
+
+
+
+
+
 		</div>
 	</div>
 </div>

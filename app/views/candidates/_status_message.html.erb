@@ -1,0 +1,27 @@
+<% if @candidate.status %>
+  <div class="panel">
+    <strong>Application Status:</strong> <%= @candidate.status %> <br><br>
+     
+    <% if @candidate.status == 'Under Consideration' %> 
+      <p>Dear <%= @candidate.user.first_name %>,
+      <br>Your Application is currently being reviewed by the team. If you don't hear from us, please check this page for status updates.</p> 
+    <% end %>
+        
+    <% if @candidate.status == 'Application Received' %> 
+      <p>Dear <%= @candidate.user.first_name %>,
+      <br>We have received your application. If you don't hear from us please visit this page again as we update the application status regularly. </p> 
+    <% end %>
+
+    <% if @candidate.status == 'Interview Request' %> 
+      <p>If you haven't heard from us already, we would like to schedule an interview with you. Please contact our HR department at your earliest.</p> 
+    <% end %>
+
+    <% if @candidate.status == 'Declined' %> 
+      <p>Dear <%= @candidate.user.first_name %>,
+      <br>Thank you for your time and energy in filling out an application for our <%= @job.title %> position. Unfortunately, we have decided not to proceed with your candidacy at this time. 
+      <br><br> 
+
+      We know how important it is to find a role and company that you are passionate about and so, from our entire team. We encourage you to apply for future openings for which you qualify. <br><br>Thanks for your interest in our company and we wish you the best of luck on your search.</p> 
+    <% end %>
+  </div>
+<% end %>

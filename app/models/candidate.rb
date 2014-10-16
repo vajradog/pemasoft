@@ -16,4 +16,6 @@ class Candidate < ActiveRecord::Base
   #  self.user.email
   #end
 
+  
+
 end

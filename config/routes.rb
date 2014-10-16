@@ -1,8 +1,15 @@
 Pemasoft::Application.routes.draw do
+
+
+
 devise_for :users#, :controllers => { :registrations => "registrations"}
 resources :users, :controller => "users"
 # MAKE SURE ABOUT THE ROUTES, USERS 
-#SEE IF WE NEED REGISTRATIONS CONTROLLER
+# SEE IF WE NEED REGISTRATIONS CONTROLLER
+ 
+resources :pages#, except: :show
+#get ':id', to: 'pages#show', as: :page #figure out routing for this guy permalink
+
 
 
 

@@ -3,93 +3,23 @@
     <%= render 'all' %> <!-- sidebar for all candidates, editable in views/candidates/_all.html.erb -->
   </div>
 
-  <div class="large-9 columns">
-    <div class="large-3 columns">
-      <%= image_tag avatar_url(@candidate.user)%>
-    </div>
-      
-    <div class="large-4 columns left">
-      <ul class="vcard">
-        <li class="fn"><%= @candidate.user.full_name%></li>
-        <li class="nickname">6113 94 Street, Apt 2K</li>
-        <li class="org">New York, NY 11374</li>
-        <li class="tel"><a href="tel:408-867-5309">408-867-5309</a></li>
-        <li class="email"><%= @candidate.user.email %></li>
-      </ul>
-    </div>
-
-    <div class="large-5 columns">
-      <ul class="vcard">
-        <% if @candidate.github? || @candidate.twitter? || @candidate.linkedin? %>
-          <li>Social Networks</li>
-          <% if @candidate.github? %>
-            <li class="url"><%= link_to 'Github', @candidate.github, target: '_blank' %></li>
-          <% end %>
-          <% if @candidate.linkedin? %>
-            <li class="url"><%= link_to 'LinkedIn', @candidate.linkedin, target: '_blank' %></li>
-          <% end %>
-          <% if @candidate.twitter? %>
-            <li class="url"><%= link_to 'Twitter', @candidate.twitter, target: '_blank' %></li>
-          <% end %>
-        <% else %>
-          No social network specified
-        <% end %>
-      </ul>
-    </div>
+  <div class="large-9 columns right">
+    <%= render 'vcard' %> <!-- Candidate vcard (name, avatar etc., editable in views/candidates/_vcard.html.erb -->
   </div>
 
   <% if can? :manage, Vote %>
-    <div class="large-9 columns right">
-      <% if can? :manage, Vote %>
-        <div class="panel">
-          <%= pluralize @candidate.reputation_for(:votes).to_i, "recommendation"%>: 
-          <%= (@candidate.evaluators_for(:votes).map {|user| user.full_name}).to_sentence %>
-        </div>
-      <% end %>
-    </div>
+    <%= render 'vote_count' %>
   <% end %>
 
   <div class="large-9 columns right">
-    <% if @candidate.status %>
-      <div class="panel">
-        <strong>Application Status:</strong> <%= @candidate.status %> <br><br>
-     
-        <% if @candidate.status == 'Under Consideration' %> 
-          <p>Dear <%= @candidate.user.first_name %>,
-          <br>Your Application is currently being reviewed by the team. If you don't hear from us, please check this page for status updates.</p> 
-        <% end %>
-        
-        <% if @candidate.status == 'Application Received' %> 
-          <p>Dear <%= @candidate.user.first_name %>,
-          <br>We have received your application. If you don't hear from us please visit this page again as we update the application status regularly. </p> 
-        <% end %>
-
-        <% if @candidate.status == 'Interview Request' %> 
-          <p>If you haven't heard from us already, we would like to schedule an interview with you. Please contact our HR department at your earliest.</p> 
-        <% end %>
-
-        <% if @candidate.status == 'Declined' %> 
-          Dear <%= @candidate.user.first_name %>,
-          <p>Thank you for your time and energy in filling out an application for our <%= @job.title %> position. Unfortunately, we have decided not to proceed with your candidacy at this time. <br><br> 
-
-          We know how important it is to find a role and company that you are passionate about and so, from our entire team. We encourage you to apply for future openings for which you qualify. <br><br>Thanks for your interest in our company and we wish you the best of luck on your search.</p> 
-        <% end %>
-      </div>
-    <% end %>
+    <%= render 'status_message' %> <!-- Application status messages, edit it in views/candidates/_status_message.html.erb -->
   </div>
 
-
   <% if can? :manage, Vote %>
-    <div class="large-9 columns right">
-      <% if current_user && !current_user.voted_for?(@candidate) %>
-        <%= link_to "I recommend this candidate", vote_job_candidate_path(@job, @candidate, type: "up"), method: "post", class:"button alert" %>
-
-       <!-- <%#= link_to "down", vote_job_candidate_path(@job, @candidate, type: "down"), method: "post" %> -->
-      <% end %>
-    </div>
+    <%= render 'vote'%> <!-- Vote button, edit it in views/candidates/_vote.html.erb -->
   <% end %>
       
-  <div class="large-9 columns">
+  <div class="large-9 columns right">
     <h4><small>Job Title: <%= @candidate.job.title %></small></h4>
     <dl class="tabs" data-tab>
       <dd class="active"><a href="#panel1"><strong>Cover Letter</strong></a></dd>
@@ -103,29 +33,38 @@
     <div class="content" id="panel2">
       <p><%=simple_format @candidate.resume %></p>
     </div>
+  </div>
 
 
-    <% if can? :manage, Role %>
-      <div class="panel radius">
-        <strong>Hiring manager status setup
-        <small><em>Visible only to the admin</em></small>
-        </strong><br><br>
+  <% if can? :manage, Role %>
+    <div class="row">
 
+      <div class="large-12 columns right">
+        <div class="panel radius">
+          <strong>Hiring manager status setup
+          <small><em>Visible only to the admin</em></small>
+          </strong><br><br>
+        
         <div class="large-4 columns">Set Applicant Status: </div>
+
         <div class="large-4 columns left">
           <%= form_for [@job, @candidate] do |f|%>
-          <%= f.select :status, ['Application Received', 'Under Consideration', 'Declined', 'Interview Request']%> 
+            <%= f.select :status, ['Application Received', 'Under Consideration', 'Declined', 'Interview Request']%> 
         </div>
+
         <div class="large-4 columns left"> 
-          <%= f.submit 'Update Candidate Status' %>
-        <% end %>
+          <%= f.submit 'Update Candidate Status' %> 
+          <% end %>
+        </div> <br> <br>
+        </div>
       </div>
-    <% end %> 
-  </div>
+    </div>
+  <% end %>
     
   
+<div class="row">
   <% if can? :manage, Comment %>
-    <div class="large-12 columns">
+    <div class="large-12 columns right">
       <div class="panel radius">
         <strong>Internal discussion 
         <small><em>Visible only to the hiring team and manager</em></small></strong>

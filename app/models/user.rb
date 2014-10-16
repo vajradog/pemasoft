@@ -51,7 +51,6 @@ class User < ActiveRecord::Base
 		else
 			scoped
 		end
-		
 	end
 
 	private

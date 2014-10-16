@@ -8,10 +8,10 @@ class CommentsController < ApplicationController
 
 		if @comment.save
 			flash[:notice]= "Comment Saved"
-			redirect_to root_path
+			redirect_to job_candidates_path
 		else
 			flash[:notice]= "Sorry could not save comment"
-			render :show
+			 render action: 'edit' 
 		end
 	end
 

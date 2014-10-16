@@ -3,6 +3,7 @@ class Ability
 
   def initialize(user)
     can :read, Job
+    can :read, Page
   
     # Define abilities for the passed in user here. For example:
     #

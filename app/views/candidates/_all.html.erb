@@ -1,19 +1,21 @@
-<ul class="pricing-table left-side">
-      <% if can? :manage, Candidate %>
-        <li class="title">All Candidates </li>
-        <% @job.candidates.each do |candidate| %>
-          <% if candidate.reputation_for(:votes).to_i > 0 %>
-          <li class="price <%= 'active' if current_page?(job_candidate_path(@job, candidate)) %>"><%= link_to candidate.user.full_name, job_candidate_path(@job, candidate) %>
-            <br><small><%= pluralize candidate.reputation_for(:votes).to_i, "Recommendation"%></small>
-            </li>
-            <%else%>
-            <li class="bullet-item"><%= link_to candidate.user.full_name, job_candidate_path(@job, candidate) %> <br>
-            <small><%= pluralize candidate.reputation_for(:votes).to_i, "Recommendation"%></small>
-            </li>
-            <% end %>
-        <% end %> 
-        <% else %>
-        You've applied to 
-        <% end %> 
-
-      </ul> 
+<% if can? :manage, Candidate %>
+  <table>
+    <thead>
+      <tr>
+        <th><h5>All Candidates</h5></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr> <td> <strong><%= link_to 'Overview page', job_candidates_path %></strong> </td> </tr>
+      <% @candidates.each do |candidate| %>
+        <% if candidate.reputation_for(:votes).to_i  %>
+          <tr>
+            <td><%= link_to candidate.user.full_name, job_candidate_path(@job, candidate), :data => { :no_turbolink => true }  %> 
+            <br>
+            <%= pluralize candidate.reputation_for(:votes).to_i, "Recommendation"%></td>
+          </tr> 
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
