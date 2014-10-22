@@ -1,0 +1,24 @@
+<% if user_signed_in? && current_user.is?(:registered) %>
+<table>
+  <thead>
+    <tr>
+      <th>Your Application Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+     <% if @current_user.candidates.map(&:user_id).include?current_user.id  %>
+        <% @current_user.candidates.each do |user| %> 
+
+      <tr>
+        <td><%= user.job.title %> <br><%= link_to user.status, job_candidate_path(user.job_id, user) %></td><% end %>
+        <% else %>
+        <td>You have not applied for any position yet.</td>
+      </tr>
+     
+      <% end %>
+     
+  </tbody>
+</table>
+
+<% end %>

@@ -7,11 +7,15 @@ class CommentsController < ApplicationController
 		@comment.user_id = current_user.id
 
 		if @comment.save
-			flash[:notice]= "Comment Saved"
-			redirect_to job_candidates_path
+			flash[:notice]= "Comment Saved. Thanks!"
+			redirect_to job_candidate_path(@candidate.job, @candidate)
 		else
-			flash[:notice]= "Sorry could not save comment"
-			 render action: 'edit' 
+			#flash.now[:error]= "Sorry could not save comment"
+			 #respond_with(@candidate)
+
+			 redirect_to(job_candidate_path(@candidate.job, @candidate), :alert => 'Sorry could not save comment. Your comment body was blank.')
+
+
 		end
 	end
 

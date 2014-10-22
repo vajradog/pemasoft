@@ -1,0 +1,32 @@
+    <div class="large-3 columns circle">
+      <%= image_tag avatar_url(@candidate.user)%>
+    </div>
+      
+    <div class="large-4 columns">
+      <ul class="vcard">
+        <li class="fn"><%= @candidate.user.full_name%></li>
+        <li class="nickname">6113 94 Street, Apt 2K</li>
+        <li class="org">New York, NY 11374</li>
+        <li class="tel"><a href="tel:408-867-5309">408-867-5309</a></li>
+        <li class="email"><%= @candidate.user.email %></li>
+      </ul>
+    </div>
+
+    <div class="large-5 columns left">
+      <ul class="vcard">
+        <% if @candidate.github? || @candidate.twitter? || @candidate.linkedin? %>
+          <li>Social Networks</li>
+          <% if @candidate.github? %>
+            <li class="url"><%= link_to 'Github', @candidate.github, target: '_blank' %></li>
+          <% end %>
+          <% if @candidate.linkedin? %>
+            <li class="url"><%= link_to 'LinkedIn', @candidate.linkedin, target: '_blank' %></li>
+          <% end %>
+          <% if @candidate.twitter? %>
+            <li class="url"><%= link_to 'Twitter', @candidate.twitter, target: '_blank' %></li>
+          <% end %>
+        <% else %>
+          No social network specified
+        <% end %>
+      </ul>
+    </div>

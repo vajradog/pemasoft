@@ -1,0 +1,12 @@
+<div class="row">   
+  <div class="large-12 columns"> 
+<h1>
+  <%= @page.name %>
+</h1>
+<%= simple_format @page.content %>
+
+<% if can? :page, Job %>
+<%= link_to 'Edit', edit_page_path(@page), :data => { :no_turbolink => true } %> |
+<%= link_to 'Back', pages_path %>
+<% end %>
+</div></div>

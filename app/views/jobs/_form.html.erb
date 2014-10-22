@@ -1,0 +1,31 @@
+<%= form_for @job do |f| %>
+  <%= render 'error_messages', object: @job%>
+
+    <div class="large-4 columns">
+      <%= f.label :position_type %>
+    	<%= f.select :position_type, ['Full-time', 'Part-time', 'Contract', 'Undisclosed']%> 
+    </div>
+    <div class="large-4 columns left">
+     <%= f.label :location %>
+			<%= f.text_field :location, placeholder: 'City, State. or Remote' %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="large-8 columns">
+      <%= f.label :title %>
+			<%= f.text_field :title, placeholder: 'Job title. Eg: Work for MoMA - RoR Developer needed' %>
+    </div>
+  </div>
+  <div class="row">
+  	<div class="large-8 columns">
+  		<%= f.label :description %>
+			<%= f.text_area :description, :class => 'ckeditor'%> 
+			<br>
+			<%= f.submit class:'button' %>
+
+  	</div>
+
+
+  </div>
+    <% end %>

@@ -1,0 +1,17 @@
+<div class="large-9 columns right">
+	<% if (@candidate.evaluators_for(:votes).map {|user| user.id}).exclude? current_user.id  %>
+  	<%= link_to "I recommend this candidate", vote_job_candidate_path(@job, @candidate, type: "up"), method: "post", class:"button alert" %>
+  <% end %>
+	<!--
+	<#% if current_user && !current_user.voted_for?(@candidate) %>
+  	<%#= link_to "I recommend this candidate", vote_job_candidate_path(@job, @candidate, type: "up"), method: "post", class:"button alert" %> 
+  
+
+
+       <!-- <%#= link_to "down", vote_job_candidate_path(@job, @candidate, type: "down"), method: "post" %> 
+	<#% end %>-->
+
+    
+
+
+</div>

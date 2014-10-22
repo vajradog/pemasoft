@@ -490,7 +490,7 @@ $default-float: left;
 
 // We use this to control alert padding.
 
-// $alert-padding-top: em-calc(11);
+ $alert-padding-top: rem-calc(11);
 // $alert-padding-default-float: $alert-padding-top;
 // $alert-padding-opposite-direction: $alert-padding-top + em-calc(10);
 // $alert-padding-bottom: $alert-padding-top + em-calc(1);

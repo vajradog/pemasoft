@@ -1,0 +1,20 @@
+<% if can? :manage, Role %>
+  <div class="large-12 columns right">
+    <div class="panel radius">
+      <strong>Hiring manager status setup
+      <small><em>Visible only to the admin</em></small>
+      </strong><br><br>
+        
+      <div class="large-4 columns">Set Applicant Status: </div>
+
+      <div class="large-4 columns left">
+        <%= form_for [@job, @candidate] do |f|%>
+          <%= f.select :status, ['Application Received', 'Under Consideration', 'Declined', 'Interview Request']%> 
+      </div>
+
+      <div class="large-4 columns left"> 
+        <%= f.submit 'Update Candidate Status' %> 
+        <% end %>
+      </div> <br> <br>
+    </div>
+  </div>

@@ -1,0 +1,7 @@
+<div class="large-9 columns right">
+  <div class="panel">
+    <%= pluralize @candidate.reputation_for(:votes).to_i, "recommendation"%>: 
+    <%= (@candidate.evaluators_for(:votes).map {|user| user.full_name}).to_sentence %>
+    
+  </div>
+</div>

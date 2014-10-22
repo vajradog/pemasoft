@@ -7,23 +7,25 @@ resources :users, :controller => "users"
 # MAKE SURE ABOUT THE ROUTES, USERS 
 # SEE IF WE NEED REGISTRATIONS CONTROLLER
  
-resources :pages#, except: :show
+#resources :pages#, except: :show
 #get ':id', to: 'pages#show', as: :page #figure out routing for this guy permalink
-
 
 
 
   root 'jobs#index'
   resources :jobs do
     resources :candidates do
-      member do
-        post 'vote'
-      end
+      member { post :vote }
       resources :comments, only: [:new, :create, :show]
     end
   end
 
   get 'search' => 'users#search'
+
+
+  resources :pages, only: [:index, :new, :create]
+  resources :pages, path: "", except: [:index, :new, :create]
+  #get '*id', to: 'pages#show'
 
   #resources :candidates
 

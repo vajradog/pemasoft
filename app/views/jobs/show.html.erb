@@ -10,22 +10,18 @@
     </div>
 
     <div class="large-9 columns">
-			<h4><%= @job.title %> 
+			<h4><%= @job.title %>         <%= render 'error_messages', object: @candidate%>
+
 
         <% if can? :manage, Job %>
-        <small>| <%= link_to 'Edit this Job', edit_job_path(@job) %> </small> 
+        <small>| <%= link_to 'Edit this Job', edit_job_path(@job), :data => { :no_turbolink => true } %> </small> 
         <% end %><br>
 			<small><%= @job.location %> | <%= @job.position_type %> | <span data-tooltip aria-haspopup="true" data-options="disable_for_touch:true" class="has-tip [tip-top tip-bottom tip-left tip-right] [radius round]" title="Job Published Date"> <%= @job.created_at.strftime("%B %d, %Y") %></span></small></h4>
 			<p><%= simple_format(@job.description) %></p>
 			<hr>
 
      
-     <!-- <#% if @job.candidates.map(&:user_id).include?current_user.id  %>
-      Thupten la this guy applied
-      <#% else %>
-      Thupten, he did not apply
-      <#% end %>
-    -->
+     
 <% if user_signed_in? %>
 
     <% if @job.candidates.map(&:user_id).include?current_user.id  %>
@@ -52,13 +48,16 @@
 
 
             <!-- maybe add user application status here? -->
-      <% else %>
+      <% elsif current_user.is?(:registered) %>
          
 <dl class="accordion" data-accordion>
    <dd class="accordion-navigation">
      <a href="#panel2">Click here to apply for this position</a>
      <div id="panel2" class="content">
       <%= form_for [@job, @candidate] do |f|%>
+        <%= render 'error_messages', object: @candidate%>
+
+
       <div class="large-12 columns">
       <%= f.label :resume, 'Resume: You can either paste/write your resume here or provide us an external link or your linkedin profile.' %> <br>
       <%= f.text_area :resume, :class => 'ckeditor' %> <br><br>

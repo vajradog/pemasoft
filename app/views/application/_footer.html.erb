@@ -1,0 +1,16 @@
+<footer>
+	<div class="row">   
+	<div class="large-12 columns"> 
+
+<!--  NAVIGATION MENU AREA -->
+ <ul class="sf-menu">
+         <% Page.footer.each do |page| %>
+          <li><%= link_to page.permalink, page_path(page) %> </li>
+        <% end %>          
+    </ul>
+  </div>
+
+
+
+<p class="copyright">Application developed with love by <a href="http://github.com/vajradog">@vajradog. </a></p> 
+</footer>

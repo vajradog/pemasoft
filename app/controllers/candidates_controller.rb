@@ -10,6 +10,7 @@ class CandidatesController < ApplicationController
 		#@candidates = Candidate.order("RANDOM()")  
 		@job = Job.find(params[:job_id])
 		@candidates = @job.candidates.reorder('votes desc').find_with_reputation(:votes, :all)
+	
 	end
 
 	def create
@@ -22,7 +23,7 @@ class CandidatesController < ApplicationController
 			flash[:success] = "Application received"
 			redirect_to root_path #job_candidate_path(@job, @candidate)
 		else
-			flash[:error] = "Could not save candidate"
+			flash[:error] = "Could not save your application"
 			redirect_to job_path(@job)
 		end
 	end
@@ -53,11 +54,11 @@ class CandidatesController < ApplicationController
 
 	def vote
 		value = params[:type] == "up" ? 1 : -1
+		#@job = Job.find(params[:job_id])
 		@candidate = Candidate.find(params[:id])
 		@candidate.add_or_update_evaluation(:votes, value, current_user)
-		redirect_to :back, notice: "Thank you for voting"
+		redirect_to :back, notice: "Thank you for recommending this candidate. Awesome!"
 	end
-
 
 
 	private

@@ -1,0 +1,31 @@
+<%= form_for(@page) do |f| %>
+  <%= render 'error_messages', object: @page%>
+
+  <div class="large-4 columns">
+    <%= f.label :name %>
+    <%= f.text_field :name, placeholder: 'Name of the page'  %>
+  </div>
+
+  <div class="large-4 columns left">
+    <%= f.label :permalink %>
+    <%= f.text_field :permalink, placeholder: 'Text you want to appear on navigation. Eg. about' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-8 columns">
+    <%= f.label :content %>
+    <%= f.text_area :content,:class => 'ckeditor' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-4 columns"><br>
+    <%= f.label :nav, 'Navigation' %>
+    <%= f.select(:nav,
+        options_for_select([['none'], ['footer'], ['header']], :selected => f.object.nav)) %>
+    <%= f.submit class:'button'%> <br>
+    </div>
+</div>
+<% end %>
+

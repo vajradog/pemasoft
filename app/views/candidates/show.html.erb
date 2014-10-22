@@ -3,6 +3,10 @@
     <%= render 'all' %> <!-- sidebar for all candidates, editable in views/candidates/_all.html.erb -->
   </div>
 
+  <div class="large-3 columns">
+    <%= render 'jobs_applied' %> <!-- sidebar for all jobs the candidate applied to, editable in views/candidates/_jobs_applied.html.erb -->
+  </div>
+
   <div class="large-9 columns right">
     <%= render 'vcard' %> <!-- Candidate vcard (name, avatar etc., editable in views/candidates/_vcard.html.erb -->
   </div>
@@ -36,7 +40,9 @@
   </div>
 
 
+
   <% if can? :manage, Role %>
+  <p>
     <div class="row">
 
       <div class="large-12 columns right">
@@ -60,12 +66,15 @@
       </div>
     </div>
   <% end %>
+
+
     
   
 <div class="row">
   <% if can? :manage, Comment %>
     <div class="large-12 columns right">
       <div class="panel radius">
+
         <strong>Internal discussion 
         <small><em>Visible only to the hiring team and manager</em></small></strong>
         <br><br>
@@ -84,4 +93,6 @@
     </div>
   <% end %>
 </div></div></div>
+    
+
     
