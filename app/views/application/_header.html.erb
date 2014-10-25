@@ -1,28 +1,23 @@
 <div class="top">
   <div class="row">
-  <div class="small-12 large-3 medium-3 columns">
+  <div class="small-12 large-3 medium-3 columns show-for-large-up">
    <div class="logo">
-   <%= link_to image_tag("http://s23.postimg.org/u01pwoh97/pemasoft_logo.png"), root_path%>
-   </div>
+   <%= link_to image_tag("http://s24.postimg.org/7f6ak195h/pemasoft_logo.png"), root_path%>
+   </div> <!-- Change the logo. I've used free image hosting service at http://postimg.org/ -->
 
 </div>
 
-<div class="small-12 large-9 medium-9 columns">
+<div class="small-12 large-9 medium-9 columns show-for-large-up">
 
 <!--  NAVIGATION MENU AREA -->
     <nav class="desktop-menu">
      <ul class="sf-menu">
          <li><%= link_to 'Home', root_path%></li>
-         <% if can? :create, Page %>
-         <li><%= link_to 'All Pages', pages_path %></li>
-         <% end %>
+        
          <% Page.header.each do |page| %>
           <li><%= link_to page.name, page_path(page) %> </li>
         <% end %>
-         <% if can? :create, Job %>
-         <li><%= link_to 'New Job', new_job_path, :data => { :no_turbolink => true } %></a></li><% end %>
-         <% if can? :create, Page %>
-         <li ><%= link_to 'New page', new_page_path, :data => { :no_turbolink => true } %></a></li><% end %>
+         
          <% if user_signed_in? %>
          <li><%= link_to current_user.email, root_path %>
              <ul>
@@ -51,22 +46,24 @@
   <%# end %>
 <%# end %>
 <br>-->
+  
 
+<!--
  <div class="container">
 <div class="row">
   <div class="large-5 large-centered columns">
-    <% if flash[:error] %>
-      <div data-alert class="alert-box alert radius"><p align="center"><%= flash[:error] %></p></div>
-    <% end %>
+    <#% if flash[:error] %>
+      <div data-alert class="alert-box alert radius"><p align="center"><%#= flash[:error] %></p></div>
+    <#% end %>
 
-    <%if flash[:notice] %>
-      <div data-alert class="alert-box info radius"><p align="center"><%= flash[:notice] %></p></div>
-    <% end %>
+    <#%if flash[:notice] %>
+      <div data-alert class="alert-box info radius"><p align="center"><%#= flash[:notice] %></p></div>
+    <#% end %>
 
-    <%if flash[:alert] %>
-      <div data-alert class="alert-box warning radius"><p align="center"><%= flash[:alert] %></p></div>
-    <% end %>
+    <#%if flash[:alert] %>
+      <div data-alert class="alert-box warning radius"><p align="center"><%#= flash[:alert] %></p></div>
+    <#% end %>
   </div><!-- //.twelve.columns -->
-</div><!-- //.row -->
-</div><!-- //.container -->
-<br>
+  <!--
+</div><
+</div> -->

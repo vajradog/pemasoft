@@ -24,13 +24,44 @@
   <body>
     <%= render 'header'%>
    
+<div class="off-canvas-wrap hide-for-large-up" data-offcanvas>
+  <div class="inner-wrap">
+    <nav class="tab-bar">
+      <section class="left-small">
+        <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+      </section>
 
-    <%= yield %>
+      <section class="middle tab-bar-section">
+        <h1 class="title"><%= link_to image_tag("http://s24.postimg.org/7f6ak195h/pemasoft_logo.png"), root_path%></h1>
+      </section>
+    </nav>
+
+    <aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        <li><label>Foundation</label></li>
+        <li><a href="#">The Psychohistorians</a></li>
+        <li><a href="#">The Psychohistorians</a></li>
+        <li><a href="#">The Psychohistorians</a></li>
+        <li><a href="#">The Psychohistorians</a></li>
+      </ul>
+    </aside>
+
+
+    <section class="main-section">
+      <br><%= yield %>
+    </section>
+
+  <a class="exit-off-canvas"></a>
+
+  </div>
+</div>
+    <div class="show-for-large-up"> <br><%= yield %></div>
     <br>
 
         
 <%= render 'footer' %>
     <%= javascript_include_tag "application" %>
+
 
 
   </body>

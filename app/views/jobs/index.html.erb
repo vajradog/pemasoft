@@ -10,14 +10,71 @@
       
 <%= render 'candidates/jobs_applied' %>
 
-<table>
+<table class="show-for-large-up">
   <tbody>
     <td><img src="http://www.agcensus.usda.gov/Partners/Drop_Ins/Half_page_vertical_Census%20ad_orange.jpg"></td>
   </tbody>
   </table>
     </div>
 
-    <div class="large-9 columns">
+
+       <div class="large-5 columns">
+
+      <div class="panel ">
+  <%= link_to 'Create a New Job', new_job_path, class:'button radius success'%>
+  <%= link_to 'Create a New Page', new_page_path, class:'button radius '%>
+
+
+<table>
+  <thead>     
+    <tr>
+      <th>Page Name</th>
+      <th>Navigation</th>
+    </tr>
+  </thead>
+  
+  <tbody><% Page.all.each do |page|%>
+    <tr>
+      <td><%= link_to page.name, page_path(page) %></td>
+      <td> <%= page.nav %></td>
+    </tr> <% end %>
+  
+  </tbody>
+</table>
+
+ 
+</div>
+</div> 
+
+<div class="large-4 columns">
+
+      <div class="panel  radius">
+    <%= link_to 'All Users', users_path, class:'button radius'%>
+  <h5>Current Moderators</h5>
+  <p><% User.where(roles_mask: 2).all.each do |user| %>
+      <%= link_to user.full_name, user_path(user) %> <br>
+    <% end %></p>
+</div>
+</div> 
+
+<div class="large-4 columns">
+
+      <div class="panel callout radius">
+  <h5>This is a callout panel.</h5>
+  <p>It's a little ostentatious, but useful for important content.</p>
+</div>
+</div> 
+
+<div class="large-5 columns">
+
+      <div class="panel callout radius">
+  <h5>This is a callout panel.</h5>
+  <p>It's a little ostentatious, but useful for important content.</p>
+</div>
+</div> 
+
+   <div class="large-9 columns">
+
     	<% @jobs.each do |job| %>
 			
 			<h4><%= link_to job.title, job_path(job), :data => { :no_turbolink => true } %> <br><small><%= job.position_type %> | <%= job.location %> | <span data-tooltip aria-haspopup="true" data-options="disable_for_touch:true" class="has-tip [tip-top tip-bottom tip-left tip-right] [radius round]" title="Job Published Date"> <%= job.created_at.strftime("%B %d, %Y") %></span></small></h4>
@@ -26,7 +83,7 @@
 
       <% if can? :manage, Candidate %>
 			<div class="panel">
-			<%= link_to pluralize(job.candidates.count, 'candidate'), job_candidates_path(job) %> applied. 
+			<font color="gray"><%= link_to pluralize(job.candidates.count, 'candidate'), job_candidates_path(job) %> applied. <% if job.candidates.interview.count > 0 %>| <%= job.candidates.interview.count %> requested for interview. <% end %><% if job.candidates.under_consideration.count > 0 %>| <%= job.candidates.under_consideration.count %> under consideration <% end %><% if job.candidates.declined.count > 0 %>| <%= pluralize(job.candidates.declined.count, 'was', 'were') %> declined. <% end %>
 			</div>
 		<% end %><hr>
     <% end %>
