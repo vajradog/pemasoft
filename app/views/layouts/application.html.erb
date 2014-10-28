@@ -23,7 +23,7 @@
 
   <body>
     <%= render 'header'%>
-   
+
 <div class="off-canvas-wrap hide-for-large-up" data-offcanvas>
   <div class="inner-wrap">
     <nav class="tab-bar">
@@ -36,14 +36,55 @@
       </section>
     </nav>
 
+
     <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-        <li><label>Foundation</label></li>
-        <li><a href="#">The Psychohistorians</a></li>
-        <li><a href="#">The Psychohistorians</a></li>
-        <li><a href="#">The Psychohistorians</a></li>
-        <li><a href="#">The Psychohistorians</a></li>
+        <li><label>Menu</label></li>
+        <% Page.header.each do |page| %>
+          <li><%= link_to page.name, page_path(page) %> </li>
+        <% end %>
       </ul>
+
+        <% if can? :manage, Job %>
+       <ul class="off-canvas-list">
+        <li><label>Jobs</label></li>
+          <li><%= link_to 'Create a new job', new_job_path %> </li>
+      </ul>
+      <% end %>
+
+        <% if can? :manage, Page %>
+       <ul class="off-canvas-list">
+        <li><label>Page Management</label></li>
+          <li><%= link_to 'New page', new_page_path %> </li>
+          <li><%= link_to 'All pages', pages_path %> </li>
+      </ul>
+      <% end %>
+
+         <% if user_signed_in? %>
+          <ul class="off-canvas-list">
+
+         <li><label><%= current_user.first_name %></label></li>
+                <li><%= link_to 'Edit my profile', edit_user_registration_path %></li>
+                <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+              </ul>
+          <% else %>
+          <ul class="off-canvas-list">
+          <li><label>Welcome</label></li>
+          <li><%= link_to "Sign up", new_user_registration_path, :data => { :no_turbolink => true } %></li>
+          <li><%= link_to "Login", new_user_session_path, :data => { :no_turbolink => true } %></li>
+          <%end %>
+        </ul>
+
+           <% if can? :manage, User %>
+            <ul class="off-canvas-list">
+               <li><label>Current moderators</label></li>
+            
+          <% User.where(roles_mask: 2).all.each do |user| %>
+      <li><%= link_to user.full_name, user_path(user) %>
+    <% end %></li>
+      </ul> <% end %>
+          
+ 
     </aside>
 
 
@@ -55,9 +96,13 @@
 
   </div>
 </div>
+
+
+
     <div class="show-for-large-up"> <br><%= yield %></div>
     <br>
-
+<div class="spacer"></div>
+</div>
         
 <%= render 'footer' %>
     <%= javascript_include_tag "application" %>

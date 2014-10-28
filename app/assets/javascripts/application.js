@@ -11,11 +11,12 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.ui.datepicker
+
 //= require jquery_ujs
 //= require ckeditor-jquery
 //= require foundation
 // require turbolinks
-
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

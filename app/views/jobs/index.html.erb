@@ -1,28 +1,32 @@
 <div class="row">   
   <div class="large-12 columns"> 
-    <div class="large-3 columns">
+    <div class="small-4 medium-4 large-3 columns hide-for-small">
       <ul class="pricing-table left-side">
         <li class="title"> Currently we have </li>
         	<li class="bullet-item"><h3><%= pluralize(@jobs.count, 'Job opening') %></h3></li>
       </ul> 
+      <% if can? :manage, User %>
+      <ul class="pricing-table left-side hide-for-small">
+        <li class="title"> Current moderators </li>
+          <li class="bullet-item"><% User.where(roles_mask: 2).all.each do |user| %>
+      <%= link_to user.full_name, user_path(user) %> <br>
+    <% end %></li>
+      </ul> <% end %>
+
 
 
       
 <%= render 'candidates/jobs_applied' %>
 
-<table class="show-for-large-up">
-  <tbody>
-    <td><img src="http://www.agcensus.usda.gov/Partners/Drop_Ins/Half_page_vertical_Census%20ad_orange.jpg"></td>
-  </tbody>
-  </table>
     </div>
 
-
-       <div class="large-5 columns">
+<% if can? :manage, Page %>
+       <div class="small-4 medium-8 large-5 columns hide-for-small">
 
       <div class="panel ">
+        <%= link_to 'Create a New Page', new_page_path, class:'button radius '%>
   <%= link_to 'Create a New Job', new_job_path, class:'button radius success'%>
-  <%= link_to 'Create a New Page', new_page_path, class:'button radius '%>
+  
 
 
 <table>
@@ -46,38 +50,16 @@
 </div>
 </div> 
 
-<div class="large-4 columns">
 
-      <div class="panel  radius">
-    <%= link_to 'All Users', users_path, class:'button radius'%>
-  <h5>Current Moderators</h5>
-  <p><% User.where(roles_mask: 2).all.each do |user| %>
-      <%= link_to user.full_name, user_path(user) %> <br>
-    <% end %></p>
-</div>
-</div> 
 
-<div class="large-4 columns">
-
-      <div class="panel callout radius">
-  <h5>This is a callout panel.</h5>
-  <p>It's a little ostentatious, but useful for important content.</p>
-</div>
-</div> 
-
-<div class="large-5 columns">
-
-      <div class="panel callout radius">
-  <h5>This is a callout panel.</h5>
-  <p>It's a little ostentatious, but useful for important content.</p>
-</div>
-</div> 
+<% end %>
 
    <div class="large-9 columns">
 
     	<% @jobs.each do |job| %>
-			
-			<h4><%= link_to job.title, job_path(job), :data => { :no_turbolink => true } %> <br><small><%= job.position_type %> | <%= job.location %> | <span data-tooltip aria-haspopup="true" data-options="disable_for_touch:true" class="has-tip [tip-top tip-bottom tip-left tip-right] [radius round]" title="Job Published Date"> <%= job.created_at.strftime("%B %d, %Y") %></span></small></h4>
+      <% if job.closedate.future? %>
+		
+			<h4><%= link_to job.title, job_path(job), :data => { :no_turbolink => true } %> <br><small><%= job.position_type %> | <%= job.location %> | <span data-tooltip aria-haspopup="true" data-options="disable_for_touch:true" class="has-tip tip-bottom radius " title="Application closing date"> <%= job.closedate.strftime("%B %d, %Y") %></span></small></h4>
 
 			
 
@@ -87,10 +69,31 @@
 			</div>
 		<% end %><hr>
     <% end %>
+      <% end %>
+
+    </div>
+
+    <div class="large-9 columns right">
+      <% @jobs.each do |job| %>
+      <% if !job.closedate.future? %>
+    
+      <h4><%=  job.title %> <br><small><%= job.position_type %> | <%= job.location %> | <span data-tooltip aria-haspopup="true" data-options="disable_for_touch:true" class="has-tip tip-bottom radius " title="Application closing date"> Closed <%= time_ago_in_words(job.closedate) %> ago</span></small></h4>
+
+      
+
+      <% if can? :manage, Candidate %>
+      <div class="panel">
+      <font color="gray"><%= link_to pluralize(job.candidates.count, 'candidate'), job_candidates_path(job) %> applied. <% if job.candidates.interview.count > 0 %>| <%= job.candidates.interview.count %> requested for interview. <% end %><% if job.candidates.under_consideration.count > 0 %>| <%= job.candidates.under_consideration.count %> under consideration <% end %><% if job.candidates.declined.count > 0 %>| <%= pluralize(job.candidates.declined.count, 'was', 'were') %> declined. <% end %>
+      </div>
+    <% end %><hr>
+    <% end %>
+      <% end %>
 
     </div>
   </div>
 </div>
+
+
 
   
 

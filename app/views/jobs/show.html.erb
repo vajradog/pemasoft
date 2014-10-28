@@ -16,7 +16,7 @@
         <% if can? :manage, Job %>
         <small>| <%= link_to 'Edit this Job', edit_job_path(@job), :data => { :no_turbolink => true } %> </small> 
         <% end %><br>
-			<small><%= @job.location %> | <%= @job.position_type %> | <span data-tooltip aria-haspopup="true" data-options="disable_for_touch:true" class="has-tip [tip-top tip-bottom tip-left tip-right] [radius round]" title="Job Published Date"> <%= @job.created_at.strftime("%B %d, %Y") %></span></small></h4>
+			<small><%= @job.location %> | <%= @job.position_type %> |  <span data-tooltip aria-haspopup="true" data-options="disable_for_touch:true" class="has-tip tip-bottom radius " title="Application closing date"> <%= @job.closedate.strftime("%B %d, %Y") %></span></small></h4>
 			<p><%= simple_format(@job.description) %></p>
 			<hr>
 
@@ -59,6 +59,7 @@
 
 
       <div class="large-12 columns">
+        <br>
       <%= f.label :resume, 'Resume: You can either paste/write your resume here or provide us an external link or your linkedin profile.' %> <br>
       <%= f.text_area :resume, :class => 'ckeditor' %> <br><br>
     </div>

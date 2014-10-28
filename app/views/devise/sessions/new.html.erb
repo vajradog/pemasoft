@@ -1,22 +1,25 @@
-  <div class="row">
-    <div class="large-3 columns">
-    <h2>Log In</h2>
+  <div class="row ">
+
+    <div class="large-4 medium-6 small-12 medium-centered large-centered columns signup-panel">
+        <div class="row ">
+    <div class="small-12 columns">
+    <p class="welcome">Log in</p>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   </div></div>
   <div class="row">
-    <div class="large-3 columns">
+    <div class="small-12 columns">
       <%= f.label :email %>
      <%= f.email_field :email, autofocus: true %>
     </div>
   </div>
     <div class="row">
-    <div class="large-3 columns">
+    <div class="small-12 columns">
       <%= f.label :password %>
      <%= f.password_field :password, autocomplete: "off" %>
     </div>
   </div>
   <div class="row">
-    <div class="large-3 columns left">
+    <div class="small-12 columns">
      <% if devise_mapping.rememberable? -%>
     <%= f.check_box :remember_me %> <%= f.label :remember_me %>
   <% end -%>
@@ -24,13 +27,9 @@
   </div>
   
   <div class="row">
-    <div class="large-3 columns">
+    <div class="small-12 columns">
        <%= f.submit "Log in", class:"button" %>
         <% end %> <br>
            <%= render "devise/shared/links" %>
     </div>
-
-
-  </div>
-
-
+  </div></div>

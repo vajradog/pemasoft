@@ -10,7 +10,7 @@ resources :users, :controller => "users"
 #resources :pages#, except: :show
 #get ':id', to: 'pages#show', as: :page #figure out routing for this guy permalink
 
-
+resources :tasks
 
   root 'jobs#index'
   resources :jobs do

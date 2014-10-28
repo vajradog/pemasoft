@@ -1,13 +1,14 @@
+
 <div class="row">
-  <div class="large-3 columns">
+  <div class="large-3 columns hide-for-medium hide-for-small">
     <%= render 'all' %> <!-- sidebar for all candidates, editable in views/candidates/_all.html.erb -->
   </div>
 
-  <div class="large-3 columns">
+  <div class="large-3 columns hide-for-medium hide-for-small">
     <%= render 'jobs_applied' %> <!-- sidebar for all jobs the candidate applied to, editable in views/candidates/_jobs_applied.html.erb -->
   </div>
 
-  <div class="large-9 columns right">
+  <div class="small-12 medium-12 large-9 columns right">
     <%= render 'vcard' %> <!-- Candidate vcard (name, avatar etc., editable in views/candidates/_vcard.html.erb -->
   </div>
 

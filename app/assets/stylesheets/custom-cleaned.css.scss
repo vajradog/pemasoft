@@ -25,31 +25,22 @@ position: relative;
 cursor: auto; }
 
 
-/* Error Explanation Styles Ends */
 /* Circle Avatar Styles */
-/* line 20, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**.circle {
+.circle {
   line-height: 0;
-  /* remove line-height *\/
   display: inline-block;
-  /* circle wraps image *\/
   margin: 5px;
-  border: 2px solid rgba(255, 255, 255, 0.4);
   border-radius: 50%;
-  /* relative value *\/
-  /*box-shadow: 0px 0px 5px rgba(0,0,0,0.4);*\/
-  transition: linear 0.25s;
+ 
   height: 170px;
   width: 170px;
 }
-**/
-/* line 31, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**.circle img {
+
+.circle img {
   border-radius: 50%;
-                   	/* relative value for
-			   adjustable image size *\/
+             
 }
-**/
+
 /* Circle Avatar Styles end */
 /* line 38, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
 /**.button.alert {
@@ -252,17 +243,15 @@ nav.desktop-menu {
   margin-bottom: 0;
 }
 
-/* line 102, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**.sf-menu ul {
+.sf-menu ul {
   z-index: 1000;
   position: absolute;
   top: -999em;
   padding: 0;
   overflow: visible !important;
 }
-**/
 /* line 103, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**.sf-menu ul li {
+.sf-menu ul li {
   display: block;
   width: 100% !important;
   text-align: left;
@@ -270,9 +259,7 @@ nav.desktop-menu {
   border-bottom: 1px solid #40546a;
   margin-left: 0 !important;
 }
-**/
-/* line 104, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**.sf-menu ul li:last-child {
+.sf-menu ul li:last-child {
   border-bottom: 0;
   -webkit-border-bottom-right-radius: 5px;
   -webkit-border-bottom-left-radius: 5px;
@@ -281,20 +268,18 @@ nav.desktop-menu {
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
 }
-**/
-/* line 105, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**.sf-menu ul li a {
+
+.sf-menu ul li a {
   border: none;
   -webkit-border-radius: 0 !important;
   -moz-border-radius: 0 !important;
   border-radius: 0 !important;
 }
-**/
-/* line 106, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**.sf-menu ul li:hover, .sf-menu ul li a:hover {
+
+.sf-menu ul li:hover, .sf-menu ul li a:hover {
   background: #dc6d28 !important;
 }
-**/
+
 /* line 107, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
 .sf-menu li {
   float: left;
@@ -327,13 +312,12 @@ nav.desktop-menu {
   display: block;
 }
 
-/* line 111, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**.sf-menu li li a {
+.sf-menu li li a {
   font-size: 11px;
   color: #fff;
   padding: 7px 10px 5px;
 }
-**/
+
 /* line 112, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
 .sf-menu li a:hover {
   background: #dc6d28;
@@ -348,35 +332,30 @@ nav.desktop-menu {
   border-radius: 5px;
 }
 
-/* line 113, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**.sf-menu li li a:hover {
+.sf-menu li li a:hover {
   border-bottom: 0;
   text-decoration: none;
 }
-**/
-/* line 114, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**.sf-menu li.current-menu-item a, .sf-menu li.current-menu-parent a, .sf-menu li.current_page_parent a {
+
+.sf-menu li.current-menu-item a, .sf-menu li.current-menu-parent a, .sf-menu li.current_page_parent a {
   background: #dc6d28;
   color: #fff;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
-**/
-/* line 115, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**.sf-menu li li.current-menu-item a, .sf-menu li.current-menu-parent li a, .sf-menu li.current-menu-item ul.sub-menu li a {
+
+.sf-menu li li.current-menu-item a, .sf-menu li.current-menu-parent li a, .sf-menu li.current-menu-item ul.sub-menu li a {
   background: #dc6d28;
   color: #fff;
 }
-**/
-/* line 116, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**.sf-menu li li.current-menu-item a:hover, .sf-menu li.current-menu-parent li a:hover, .sf-menu li.current-menu-item ul.sub-menu li a:hover {
+
+.sf-menu li li.current-menu-item a:hover, .sf-menu li.current-menu-parent li a:hover, .sf-menu li.current-menu-item ul.sub-menu li a:hover {
   background: #3ec7cf;
   color: #fff;
 }
-**/
-/* line 117, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**.sf-menu li:hover ul, .sf-menu li.sfHover ul {
+
+.sf-menu li:hover ul, .sf-menu li.sfHover ul {
   left: 0;
   top: 80px;
   z-index: 999999;
@@ -394,23 +373,19 @@ nav.desktop-menu {
   animation-fill-mode: both;
   animation-name: fadeInRight;
 }
-**/
-/* line 118, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**ul.sf-menu li:hover li ul, ul.sf-menu li.sfHover li ul {
+ul.sf-menu li:hover li ul, ul.sf-menu li.sfHover li ul {
   top: -999em;
 }
-**/
-/* line 119, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**ul.sf-menu li li:hover ul, ul.sf-menu li li.sfHover ul {
+
+ul.sf-menu li li:hover ul, ul.sf-menu li li.sfHover ul {
   left: 175px;
   top: 0;
   -webkit-border-radius: 0 !important;
   -moz-border-radius: 0 !important;
   border-radius: 0 !important;
 }
-**/
-/* line 120, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**ul.sf-menu li li:hover ul li:last-child, ul.sf-menu li li.sfHover ul li:last-child {
+
+ul.sf-menu li li:hover ul li:last-child, ul.sf-menu li li.sfHover ul li:last-child {
   -webkit-border-bottom-right-radius: 5px;
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius-bottomright: 5px;
@@ -418,28 +393,22 @@ nav.desktop-menu {
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
 }
-**/
-/* line 121, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**ul.sf-menu li li:hover li ul, ul.sf-menu li li.sfHover li ul {
+ul.sf-menu li li:hover li ul, ul.sf-menu li li.sfHover li ul {
   top: -999em;
 }
-**/
-/* line 122, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**ul.sf-menu li li li:hover ul, ul.sf-menu li li li.sfHover ul {
+
+ul.sf-menu li li li:hover ul, ul.sf-menu li li li.sfHover ul {
   left: 175px;
   top: 0;
   -webkit-border-radius: 0 !important;
   -moz-border-radius: 0 !important;
   border-radius: 0 !important;
 }
-**/
-/* line 123, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
 .sf-menu li:hover {
   outline: 0;
 }
 
-/* line 124, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**.sf-menu li li a:hover {
+.sf-menu li li a:hover {
   color: #fff !important;
   -webkit-transition: none !important;
   -moz-transition: none !important;
@@ -447,20 +416,17 @@ nav.desktop-menu {
   -ms-transition: none !important;
   transition: none !important;
 }
-**/
-/* line 125, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
+
 .sf-menu > li:hover {
   border: none !important;
   background: none !important;
 }
 
-/* line 126, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**.alt-nav {
+.alt-nav {
   display: none;
 }
-**/
-/* line 127, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**.sf-menu ul {
+
+.sf-menu ul {
   background: #37485C;
   -webkit-border-bottom-right-radius: 5px;
   -webkit-border-bottom-left-radius: 5px;
@@ -469,9 +435,8 @@ nav.desktop-menu {
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
 }
-**/
-/* line 128, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**.sf-menu ul:after {
+
+.sf-menu ul:after {
   bottom: 100%;
   border: solid transparent;
   content: " ";
@@ -480,31 +445,32 @@ nav.desktop-menu {
   position: absolute;
   pointer-events: none;
 }
-**/
-/* line 129, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**.sf-menu ul:after {
+
+.sf-menu ul:after {
   border-color: rgba(127, 140, 141, 0);
   border-bottom-color: #37485C;
   border-width: 10px;
   left: 17%;
   margin-left: -10px;
 }
-**/
-/* line 130, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**.sf-menu ul li ul:after {
+
+.sf-menu ul li ul:after {
   bottom: 100%;
   border: transparent;
 }
-**/
-/* line 131, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-/**.sf-menu ul li ul:after {
+
+.sf-menu ul li ul:after {
   border: 0;
 }
-**/
-/* line 136, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */
-footer {
-  padding: 5px 0 20px;
-  background: #393939;
+
+
+
+.footer { 
+  height: 8em; 
+  width: 100%;
+  background: #393939; 
+  position: relative; 
+  bottom: 0; 
 }
 
 /* line 138, /Users/VajraCreations/rails_projects/pemasoft/app/assets/stylesheets/custom.scss */

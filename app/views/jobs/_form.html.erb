@@ -12,9 +12,13 @@
   </div>
   
   <div class="row">
-    <div class="large-8 columns">
+    <div class="large-6 columns">
       <%= f.label :title %>
 			<%= f.text_field :title, placeholder: 'Job title. Eg: Work for MoMA - RoR Developer needed' %>
+    </div>
+    <div class="large-2 columns left">
+    <%= f.label :closedate %>
+    <%= f.text_field :closedate, placeholder: "yyyy-mm-dd" %>
     </div>
   </div>
   <div class="row">
@@ -22,6 +26,7 @@
   		<%= f.label :description %>
 			<%= f.text_area :description, :class => 'ckeditor'%> 
 			<br>
+     
 			<%= f.submit class:'button' %>
 
   	</div>
